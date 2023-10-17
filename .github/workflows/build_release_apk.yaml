@@ -1,0 +1,42 @@
+name: Build and release APK
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v4
+        with:
+          flutter-version: 3.13.7
+
+      - name: Build APK
+        run: flutter build apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/apk/app-release.apk
+
+  create-release:
+    name: Create gitHub release
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ${{ needs.build.outputs.artifacts.release-apk }}
+      env:
+        # GITHUB_TOKEN: ${{ secrets.CREATE_RELEASE_APK }}
+        USERNAME: ${{ github.repository_owner }}
