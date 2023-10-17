@@ -202,9 +202,8 @@ class _MyAppState extends State<MyApp> {
     timeEnd = settings.timeEnd ?? '21:00';
     widgetBackgroundColor = settings.widgetBackgroundColor ?? '';
     widgetTextColor = settings.widgetTextColor ?? '';
-    if (Platform.isAndroid) {
-      HomeWidget.setAppGroupId(appGroupId);
-    }
+    if (Platform.isAndroid) HomeWidget.setAppGroupId(appGroupId);
+
     super.initState();
   }
 

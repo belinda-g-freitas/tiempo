@@ -27,20 +27,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   const SizedBox(height: 15),
                   Text(
                     'Rain - ${'name'.tr}',
-                    style: context.textTheme.titleLarge?.copyWith(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: context.textTheme.titleLarge?.copyWith(fontSize: 32, fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 5),
                   SizedBox(
                     width: 300,
-                    child: Text(
-                      'description'.tr,
-                      style: context.textTheme.labelMedium?.copyWith(fontSize: 14),
-                      textAlign: TextAlign.center,
-                    ),
+                    child: Text('description'.tr, style: context.textTheme.labelMedium?.copyWith(fontSize: 14), textAlign: TextAlign.center),
                   ),
                 ],
               ),
@@ -52,10 +45,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 onPressed: () async {
                   settings.onboard = true;
                   isar.writeTxnSync(() => isar.settings.putSync(settings));
-                  Get.off(
-                    () => const HomePage(),
-                    transition: Transition.downToUp,
-                  );
+                  Get.off(() => const HomePage(), transition: Transition.downToUp);
                 },
               ),
             ),
